@@ -150,8 +150,47 @@ public class AryLinkedList<E> {
 				}
 				n[ptr].next = NULL;
 				deleteIndex(ptr);
-				
+				n[ptr].next = n[p].next;
+				crnt = ptr;
 			}
+		}
+	}
+	
+	// 선택 노드를 삭제
+	public void removeCurrentNode() {
+		remove(crnt);
+	}
+	
+	// 모든 노드를 삭제
+	public void clear() {
+		while (head != NULL)	// 텅 빌 때까지
+			removeFirst();		// 머리 노드를 삭제
+		crnt = NULL;
+	}
+	
+	// 선택 노드를 하나 뒤쪽으로 이동
+	public boolean next() {
+		if (crnt == NULL || n[crnt].next == NULL)
+			return false;	// 이동할 수 없음
+		crnt = n[crnt].next;
+		return true;
+	}
+	
+	// 선택 노드를 출력
+	public void printCurrentNode() {
+		if (crnt == NULL)
+			System.out.println("선택 노드가 없습니다.");
+		else
+			System.out.println(n[crnt].data);
+	}
+	
+	// 모든 노드를 출력
+	public void dump() {
+		int ptr = head;
+		
+		while (ptr != NULL) {
+			System.out.println(n[ptr].data);
+			ptr = n[ptr].next;
 		}
 	}
 }
